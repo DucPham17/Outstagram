@@ -2,6 +2,8 @@ package com.ducpham.outstagram;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        Post post = postList.get(position);
+        final Post post = postList.get(position);
         holder.name.setText(post.getUser().getUsername());
         Glide.with(context).asBitmap().load(post.getImage().getUrl()).into(holder.dataPicture);
         holder.caption.setText(post.getDescription());
@@ -46,11 +48,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Glide.with(context).asBitmap().load(R.mipmap.paper).into(holder.share);
         Glide.with(context).asBitmap().load(R.mipmap.bubble).into(holder.comment);
         Glide.with(context).asBitmap().load(R.mipmap.save).into(holder.save);
-
+        holder.dataPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailPost.class);
+                intent.putExtra("des",post.getDescription());
+                intent.putExtra("date",post.getTime().toString().substring(0,post.getTime().toString().length()-8));
+                intent.putExtra("image", post.getImage().getUrl());
+                context.startActivity(intent);
+            }
+        });
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.heart.setColorFilter(R.color.colorPink);
+                holder.heart.setColorFilter(Color.RED);
             }
         });
     }

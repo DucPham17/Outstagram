@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.camera);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
     }
 
 
