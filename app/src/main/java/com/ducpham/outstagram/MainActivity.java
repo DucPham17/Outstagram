@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_add:
                         fragment = new Add();
                         break;
+                    case R.id.action_info:
+                        fragment = new Info();
+                        break;
                     default:
                         fragment = new User();
                         break;

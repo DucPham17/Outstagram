@@ -16,6 +16,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        Log.d("Adapter",String.valueOf(context));
         final Post post = postList.get(position);
         holder.name.setText(post.getUser().getUsername());
         Glide.with(context).asBitmap().load(post.getImage().getUrl()).into(holder.dataPicture);
@@ -48,6 +50,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Glide.with(context).asBitmap().load(R.mipmap.paper).into(holder.share);
         Glide.with(context).asBitmap().load(R.mipmap.bubble).into(holder.comment);
         Glide.with(context).asBitmap().load(R.mipmap.save).into(holder.save);
+
+        if(post.getUser().getParseFile("userImage") != null){
+            Glide.with(context).asBitmap().load(post.getUser().getParseFile("userImage").getUrl()).into(holder.imageView);
+        }
         holder.dataPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +76,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public int getItemCount() {
         return postList.size();
     }
+    // Clean all elements of the recycler
+    public void clear() {
+        postList.clear();
+        notifyDataSetChanged();
+    }
 
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        postList.addAll(list);
+        notifyDataSetChanged();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;

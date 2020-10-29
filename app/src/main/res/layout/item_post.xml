@@ -9,9 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/frame"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -23,12 +22,12 @@
         android:text="TextView" />
 
     <ImageView
-        android:id="@+id/dataPicture"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:srcCompat="@tools:sample/avatars" />
+    android:id="@+id/dataPicture"
+    android:layout_below="@+id/imageView"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/heart"
@@ -82,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-         />
+        />
 
     <TextView
         android:id="@+id/time"

@@ -11,6 +11,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class Home extends Fragment {
     PostAdapter postAdapter;
     EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener;
     private EndlessRecyclerViewScrollListener scrollListener;
+    private SwipeRefreshLayout swipeContainer;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,15 @@ public class Home extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         queryPost();
 
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                postAdapter.clear();
+                queryPost();
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 
     public void queryPost(){
